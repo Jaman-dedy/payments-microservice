@@ -1,3 +1,3 @@
 export class CreatePaymentDto {
-  amount: string;
+  amount: number;
 }
