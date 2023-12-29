@@ -11,9 +11,11 @@ export class PaymentsMicroserviceController {
   ) {}
   @EventPattern('createPayment')
   async createPayment(@Payload() createPaymentDto: CreatePaymentDto) {
-    console.log('createPaymentDto payment :>> ', createPaymentDto);
+    console.log('createPaymentDto :>> ', createPaymentDto);
     const newPayment =
       await this.paymentsService.createPayment(createPaymentDto);
-    this.natsclient.emit('paymentCreated', newPayment);
+    if (newPayment) {
+      this.natsclient.emit('paymentCreated', newPayment);
+    }
   }
 }
