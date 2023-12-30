@@ -18,15 +18,11 @@ export class PaymentsService {
     const user = await lastValueFrom<User>(
       this.natsclient.send({ cmd: 'getUserById' }, { userId }),
     );
-    console.log('user :>> ++++ ', user);
-    if (user) {
-      const newPayment = this.paymentsRepository.create({
-        ...createPayment,
-        user,
-      });
-      console.log('newPayment :>> ', newPayment);
-      return this.paymentsRepository.save(newPayment);
-    }
-    return null;
+    const newPayment = this.paymentsRepository.create({
+      ...createPayment,
+      user,
+    });
+    console.log('newPayment +++ :>> ', newPayment);
+    return this.paymentsRepository.save(newPayment);
   }
 }
